@@ -1,7 +1,77 @@
+/* Grundläggande styling */
 body {
-  font-family: sans-serif;
-  color: #666;
-  background-color: #f1f1f1;
-  font-size: x-large;
-  margin: 1em;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
+
+/* Navigationsmeny */
+.nav {
+  width: 250px;
+  height: 570px;
+  background-color: #ececec;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.nav h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.5em;
+}
+
+.nav a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.nav a:hover {
+  background: #dbdbdb;
+}
+
+/* Huvudinnehåll - card layout */
+.main {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap; /* Låter korten radbrytas */
+  gap: 20px; /* Avstånd mellan korten */
+  padding: 20px;
+  justify-content: flex-start; /* Korten placeras från vänster till höger */
+}
+
+/* Card-styling */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: calc(25% - 20px); /* Varje kort tar upp en tredjedel av raden */
+  height: 250px;
+  position: relative;
+}
+
+.add-todo {
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px dashed #4CAF50;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: calc(26%); /* Plus-kortet tar också upp en tredjedel */
+  height: 277px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-todo:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
