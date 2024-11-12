@@ -1,0 +1,16 @@
+<h2>Edit ToDo</h2>
+
+<form action="/todo/<%= @fruit['id'] %>/update" method="POST">
+  <!-- Method override to use PUT -->
+  <input type="hidden" name="_method" value="PUT">
+
+  <label for="name">Name:</label>
+  <input type="text" name="name" id="name" value="<%= @fruit['name'] %>">
+  <br>
+
+  <label for="description">Description:</label>
+  <textarea name="description" id="description"><%= @fruit['description'] %></textarea>
+  <br>
+
+  <button type="submit">Update Fruit</button>
+</form>

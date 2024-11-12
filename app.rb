@@ -10,7 +10,19 @@ class App < Sinatra::Base
   end
 
   get '/' do 
+    redirect('/todo')
+  end
+
+  get '/todo' do
     @todos = db.execute('SELECT * FROM todos')
     erb(:"index")
   end
+
+  post '/todo/add' do 
+    name = params["name"]
+    description = params["desription"]
+
+  end
+
+
 end

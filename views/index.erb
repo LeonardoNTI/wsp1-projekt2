@@ -12,8 +12,9 @@
     <h1>Todo List</h1> 
 
     <h2>Add a new Todo</h2>
-    <form action="/add" method="post">
-      <input type="text" name="todo" required>
+    <form action="todo/add" method="post">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="text" name="description" placeholder="Description">
       <button type="submit">Add</button>
     </form>
   </aside>
@@ -24,6 +25,13 @@
         <div class="card">
           <h2><%= todo['name']%></h2>
           <p><%=todo['description']%></p>
+
+          <div>
+            <form class ="delete" action="/todo/<%= todo["id"] %>"></form>
+
+
+          </div>
+
         </div>
       <%end%>
     <%end%>
