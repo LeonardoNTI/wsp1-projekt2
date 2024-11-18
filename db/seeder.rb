@@ -20,7 +20,7 @@ class Seeder
   end
 
   def self.populate_tables
-   db.execute('INSERT INTO todos (name, description) VALUES ("Lära dig stava", "Gå till skolan dumfan")')
+   db.execute('INSERT INTO todos (name, description) VALUES ("Inköpslista", "Gå till affären och köp, mjölk, ägg, äpplen, lingon, apelsin och aprekos för mormors specialpaj")')
   end
 
   private

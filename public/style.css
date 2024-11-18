@@ -88,6 +88,41 @@ aside button:hover {
   text-align: center;
 }
 
+/* Todo-card */
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+  justify-content: space-between; /* Space between content and push button down */
+  height: 250px; /* Optional fixed height for consistency */
+}
+
+/* Mod buttons */
+.delete_button {
+  margin-top: auto; /* Pushes the mod_buttons to the bottom of the card */
+  display: flex;
+  justify-content: flex-start; /* Align the button to the left */
+  padding-top: 10px; /* Adds some space above the button */
+}
+
+/* Button styling */
+.delete_button button {
+  padding: 5px 10px;
+  background-color: #db3434; /* Matches your existing blue theme */
+  color: white;
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer;
+}
+
+.delete_button button:hover {
+  background-color: #b92929; /* Darker blue when hovering */
+}
+
+
 /* Lägg till-kort */
 .add-card {
   background-color: #ecf0f1;
@@ -106,7 +141,6 @@ aside button:hover {
   opacity: 0.9;
 }
 
-
 /* Lägg till-knapp */
 #add-todo {
   display: flex;
@@ -122,3 +156,4 @@ aside button:hover {
 #add-todo:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
+
