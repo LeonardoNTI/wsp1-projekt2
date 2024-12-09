@@ -1,4 +1,5 @@
 require 'sqlite3'
+require 'bcrypt'
 
 class Seeder
   
@@ -10,17 +11,28 @@ class Seeder
 
   def self.drop_tables
     db.execute('DROP TABLE IF EXISTS todos')
+    db.execute('DROP TABLE IF EXISTS users')
   end
 
   def self.create_tables
     db.execute('CREATE TABLE todos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
-                description TEXT)')
+                description TEXT,
+                user_id INTEGER)')
+    db.execute('CREATE TABLE users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                password TEXT NOT NULL)')
   end
 
+
   def self.populate_tables
-   db.execute('INSERT INTO todos (name, description) VALUES ("Inköpslista", "Gå till affären och köp, mjölk, ägg, äpplen, lingon, apelsin och aprekos för mormors specialpaj")')
+    password_hashed1 = BCrypt::Password.create("123")
+    password_hashed2 = BCrypt::Password.create("456")
+    
+    db.execute('INSERT INTO users (username, password) VALUES (?, ?)', ["Leonardo", password_hashed1])
+    db.execute('INSERT INTO users (username, password) VALUES (?, ?)', ["Lennart", password_hashed2])
   end
 
   private

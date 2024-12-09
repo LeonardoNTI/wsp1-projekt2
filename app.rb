@@ -9,38 +9,96 @@ class App < Sinatra::Base
     return @db
   end
 
+  configure do
+    enable :sessions
+    set :session_secrets, SecureRandom.hex(64)
+  end
+
   get '/' do 
-    redirect('/todo')
+    if session[:user_id]
+      erb(:"admin/index")
+    else
+      erb(:"index")
+    end
   end
 
-  get '/todo' do
+  get '/admin' do
+    if session[:user_id]
+      erb(:"admin/index")
+    else
+      p "/admin : Access dnied."
+      status 404
+      redirect '/unauthorized'
+    end
+  end
+
+  post '/login' do
+    request_username =
+     params[:username]
+    request_plain_password = params[:password]
+
+    user = db.execute("SELECT * FROM users WHERE username =?", request_username).first
+
+    unless user
+      p "/login : Invalid username."
+      status 401
+      redirect '/unauthorized'
+    end
+
+    db_id = user["id"].to_i
+    db_password_hashed = user["password"].to_s
+
+    bcrypt_db_password = BCrypt::Password.new(db_password_hashed)
+
+    if bcrypt_db_password == request_plain_password
+      session[:user_id] = db_id
+      @todos = 
+      redirect '/todos'
+    else
+      status 401
+      redirect '/unauthorized'
+    end
+  end
+
+  get '/unauthorized' do
+    erb(:unauthorized)
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
+  end
+
+  get '/todos' do
     @todos = db.execute('SELECT * FROM todos')
-    erb(:"index")
+    @users = db.execute('SELECT * FROM users WHERE id = ?', session[:user_id]).first
+
+    erb(:"admin/index")
   end
 
-  post '/todo/add' do 
+  post '/todos' do 
  
-    todo_params = [params['name'], params['description']]
-    db.execute("INSERT INTO todos (name, description) VALUES (?,?)", todo_params)
+    todo_params = [params['name'], params['description'], session[:user_id]]
+    db.execute("INSERT INTO todos (name, description, user_id) VALUES (?,?,?)", todo_params)
 
-    redirect '/todo'
+    redirect '/todos'
   end
 
-  post '/todo/:id/delete' do | id |
+  post '/todos/:id/delete' do | id |
     db.execute("DELETE FROM todos WHERE id =?", id).first
 
-    redirect '/todo'
+    redirect '/todos'
   end
 
-  get '/todo/:id/edit' do | id |
+  get '/todos/:id/edit' do | id |
     @todo = db.execute("SELECT * FROM todos WHERE id = ?", id).first
     erb :"edit"
   end
 
-  post '/todo/:id/update' do |id|
+  post '/todos/:id/update' do |id|
     todo_params = [params['name'], params['description'], id]
-    db.execute("UPDATE todo SET name = ?, description = ? WHERE id = ?", todo_params)
-    redirect "/todo/#{id}"
-end
+    db.execute("UPDATE todos SET name = ?, description = ? WHERE id = ?", todo_params)
+    redirect "/todos"
+  end
 
 end

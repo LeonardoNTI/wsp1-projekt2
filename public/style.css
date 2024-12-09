@@ -157,3 +157,147 @@ aside button:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+/* Login Page Styling */
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.login-container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #bdc3c7;
+  width: 100%;
+}
+
+.login-container button {
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.login-container button:hover {
+  background-color: #2980b9;
+}
+
+/* Match the Aside Style */
+aside {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+/* Logged-in Text Styling */
+aside h2 {
+  margin-top: 20px;
+  font-size: 1.1rem; /* Slightly larger font size */
+  color: #bdc3c7; /* Subtle color */
+}
+
+aside h2 .username_color {
+  color: #ecf0f1; /* Lighter color for the username */
+  font-weight: bold;
+  text-decoration: underline; /* Underlined for emphasis */
+}
+
+/* Logout Button Styling */
+aside a[href="/logout"] {
+  margin-top: auto; /* Pushes the logout link to the bottom */
+  text-align: center;
+  display: block;
+  padding: 10px;
+  background-color: #e74c3c; /* Red background for logout */
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+aside a[href="/logout"]:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Basic Aside Styling (common for both logged-in and not logged-in states) */
+aside {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  transition: filter 0.3s ease; /* Smooth transition for the blur */
+}
+
+/* Blurred Aside for non-logged-in users */
+aside.blurred {
+  filter: blur(5px); /* Apply blur effect */
+  pointer-events: none; /* Prevent interaction with the blurred aside */
+  position: relative; /* Ensure the icon overlays properly */
+}
+
+/* Lock Icon Overlay for the blurred aside */
+.lock-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem; /* Adjust the size of the icon */
+  color: rgba(255, 255, 255, 0.7); /* Slightly transparent color for the icon */
+  z-index: 10; /* Ensure the icon stays above the blurred content */
+  width: 150px;
+  height: 150px;
+  background-size: contain; /* Ensures the image is contained within the div */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('img/lock-icon-png-image_318067-removebg-preview.png'); /* Add image here */
+}
+
+/* Normal Aside when logged in (no blur) */
+aside:not(.blurred) {
+  filter: none;
+}
